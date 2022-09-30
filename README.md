@@ -18,7 +18,7 @@ python main.py
 
 <div align="center"><img width="400" height="350" src="https://github.com/ALiShan-RL/TD3-SAC/blob/main/img/HalfCheetah.png?raw=true"/></div>
 
-#Citing
+# Citing
 
 Please use this bibtex if you want to cite this repository in your publications :
 
