@@ -24,7 +24,7 @@ Please use this bibtex if you want to cite this repository in your publications 
 
 ```
 @misc{TD3-and-SAC,
-    author = {ALiShan-RL, ZYS},
+    author = {ALiShan-RL, closedboyzys},
     title = {PyTorch Implementation of Soft Actor-Critic and TD3},
     year = {2022},
     publisher = {GitHub},
