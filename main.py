@@ -38,7 +38,7 @@ if __name__ == "__main__":
 	
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--policy", default="SAC")                  # Policy name (TD3, DDPG or OurDDPG)
-	parser.add_argument("--env", default="HalfCheetah-v3")          # OpenAI gym environment name
+	parser.add_argument("--env", default="HalfCheetah-v2")          # OpenAI gym environment name
 	parser.add_argument("--seed", default=0, type=int)              # Sets Gym, PyTorch and Numpy seeds
 	parser.add_argument("--start_timesteps", default=5e3, type=int)# Time steps initial random policy is used
 	parser.add_argument("--eval_freq", default=5e3, type=int)       # How often (time steps) we evaluate
@@ -49,7 +49,8 @@ if __name__ == "__main__":
 	parser.add_argument("--tau", default=0.005)                     # Target network update rate
 	parser.add_argument("--policy_noise", default=0.2)              # Noise added to target policy during critic update
 	parser.add_argument("--noise_clip", default=0.5)                # Range to clip target policy noise
-	parser.add_argument("--policy_freq", default=2, type=int)       # Frequency of delayed policy updates
+	parser.add_argument("--policy_freq", default=1, type=int)       # Frequency of delayed policy updates, SAC=1 , TD3=2
+	parser.add_argument("--alpha", default="0.2", type=float)       # Temperature Coefficient of SAC Entropy
 	parser.add_argument("--save_model", action="store_true")        # Save model and optimizer parameters
 	parser.add_argument("--load_model", default="")                 # Model load file name, "" doesn't load, "default" uses file_name
 	args = parser.parse_args()
@@ -94,23 +95,12 @@ if __name__ == "__main__":
 		kwargs["noise_clip"] = args.noise_clip * max_action
 		kwargs["policy_freq"] = args.policy_freq
 		policy = TD3.TD3(**kwargs)
-	elif args.policy == "GEM":
-		# Target policy smoothing is scaled wrt the action scale
-		kwargs["policy_noise"] = args.policy_noise * max_action
-		kwargs["noise_clip"] = args.noise_clip * max_action
-		kwargs["policy_freq"] = args.policy_freq
-		policy = GEM.TD3(**kwargs)
-	elif args.policy == "ADER":
-		# Target policy smoothing is scaled wrt the action scale
-		kwargs["policy_noise"] = args.policy_noise * max_action
-		kwargs["noise_clip"] = args.noise_clip * max_action
-		kwargs["policy_freq"] = args.policy_freq
-		policy = ADER.TD3(**kwargs)
 	elif args.policy == "OurDDPG":
 		policy = OurDDPG.DDPG(**kwargs)
 	elif args.policy == "DDPG":
 		policy = DDPG.DDPG(**kwargs)
 	elif args.policy == "SAC":
+		kwargs["alpha"] = args.alpha
 		policy = SAC.SAC(**kwargs)
 
 	if args.load_model != "":
