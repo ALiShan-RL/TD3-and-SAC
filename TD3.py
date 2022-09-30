@@ -104,7 +104,7 @@ class TD3(object):
 		self.total_it = 0
 
 
-	def select_action(self, state):
+	def select_action(self, state, deterministic=False):
 		state = torch.FloatTensor(state.reshape(1, -1)).to(device)
 		return self.actor(state).cpu().data.numpy().flatten()
 
@@ -154,7 +154,7 @@ class TD3(object):
 			actor_loss.backward()
 			self.actor_optimizer.step()
 
-			# Update the frozen target models更新冻结的目标模型
+			# Update the frozen target models
 			for param, target_param in zip(self.critic.parameters(), self.critic_target.parameters()):
 				target_param.data.copy_(self.tau * param.data + (1 - self.tau) * target_param.data)
 
