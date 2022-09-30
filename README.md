@@ -1,5 +1,5 @@
 # TD3+SAC
-![PyPI](https://img.shields.io/pypi/v/rl_plotter?style=flat-square) ![GitHub](https://img.shields.io/github/license/gxywy/rl-plotter?style=flat-square) ![GitHub last commit](https://img.shields.io/github/last-commit/gxywy/rl-plotter?style=flat-square)
+![GitHub](https://img.shields.io/github/license/gxywy/rl-plotter?style=flat-square) 
 
 本库主要是将[TD3](https://arxiv.org/pdf/1802.09477.pdf)的代码[code](https://link.zhihu.com/?target=https%3A//github.com/sfujim/TD3)与[rl_plotter](https://github.com/gxywy/rl-plotter) 结合
 
@@ -13,3 +13,7 @@
 ```
 python main.py
 ```
+
+# Performance
+
+<div align="center"><img width="400" height="300" src="https://github.com/ALiShan-RL/TD3-SAC/blob/main/img/HalfCheetah.png?raw=true"/></div>
