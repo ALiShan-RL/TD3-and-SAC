@@ -16,4 +16,4 @@ python main.py
 
 # Performance
 
-<div align="center"><img width="400" height="300" src="https://github.com/ALiShan-RL/TD3-SAC/blob/main/img/HalfCheetah.png?raw=true"/></div>
+<div align="center"><img width="400" height="400" src="https://github.com/ALiShan-RL/TD3-SAC/blob/main/img/HalfCheetah.png?raw=true"/></div>
