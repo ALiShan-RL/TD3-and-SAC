@@ -79,6 +79,7 @@ class SAC(object):
             discount=0.99,
             tau=0.005,
             policy_freq=1,
+            alpha=0.2,
     ):
         self.actor = GaussianPolicy(state_dim, action_dim, max_action).to(device)
         self.actor_target = copy.deepcopy(self.actor)
@@ -93,7 +94,7 @@ class SAC(object):
         self.tau = tau
         self.policy_freq = policy_freq
 
-        self.alpha = 0.2
+        self.alpha = alpha
 
         self.total_it = 0
     def select_action(self, state, deterministic=False):
@@ -116,14 +117,13 @@ class SAC(object):
         loss1 = F.mse_loss(current_Q1, target_Q)
         loss2 = F.mse_loss(current_Q2, target_Q)
         critic_loss = loss1 + loss2
-        # print(critic_loss)
         #critic_loss = F.mse_loss(current_Q1, target_Q) / 2 + F.mse_loss(current_Q2, target_Q) / 2
 
         self.critic_optimizer.zero_grad()
         critic_loss.backward()
         self.critic_optimizer.step()
 
-        if self.total_it % self.policy_freq == 0:
+        if self.total_it % self.policy_freq == 0:   # SAC dont need that
 
             # Compute actor losse
             action, log_pi = self.actor.sample(state)
@@ -133,12 +133,12 @@ class SAC(object):
 
 
             # Optimize the actor
-            # print(actor_loss)
+
             self.actor_optimizer.zero_grad()
             actor_loss.backward()
             self.actor_optimizer.step()
 
-            # Update the frozen target models更新冻结的目标模型
+            # Update the frozen target models
             for param, target_param in zip(self.critic.parameters(), self.critic_target.parameters()):
                 target_param.data.copy_(self.tau * param.data + (1 - self.tau) * target_param.data)
 
