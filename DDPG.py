@@ -58,7 +58,7 @@ class DDPG(object):
 		self.tau = tau
 
 
-	def select_action(self, state):
+	def select_action(self, state,  deterministic=False):
 		state = torch.FloatTensor(state.reshape(1, -1)).to(device)
 		return self.actor(state).cpu().data.numpy().flatten()
 
