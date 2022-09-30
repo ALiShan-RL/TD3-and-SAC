@@ -17,3 +17,18 @@ python main.py
 # Performance
 
 <div align="center"><img width="400" height="350" src="https://github.com/ALiShan-RL/TD3-SAC/blob/main/img/HalfCheetah.png?raw=true"/></div>
+
+#Citing
+
+Please use this bibtex if you want to cite this repository in your publications :
+
+```
+@misc{TD3-and-SAC,
+    author = {ALiShan-RL, ZYS},
+    title = {PyTorch Implementation of Soft Actor-Critic and TD3},
+    year = {2022},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://github.com/ALiShan-RL/TD3-and-SAC}},
+}
+```
